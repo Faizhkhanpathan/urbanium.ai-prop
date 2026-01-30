@@ -1,0 +1,139 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: ["class"],
+  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+        iot: {
+          navy: "hsl(var(--iot-navy))",
+          charcoal: "hsl(var(--iot-charcoal))",
+          teal: "hsl(var(--iot-teal))",
+          green: "hsl(var(--iot-green))",
+          cyan: "hsl(var(--iot-cyan))",
+          slate: "hsl(var(--iot-slate))",
+        },
+        status: {
+          online: "hsl(var(--status-online))",
+          warning: "hsl(var(--status-warning))",
+          critical: "hsl(var(--status-critical))",
+          offline: "hsl(var(--status-offline))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        // existing keyframes
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        glow: {
+          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--iot-teal) / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(var(--iot-teal) / 0.6)" },
+        },
+
+        // NEW flip animations
+        flip: {
+          "0%": { transform: "rotateY(0deg)" },
+          "50%": { transform: "rotateY(180deg)" },
+          "100%": { transform: "rotateY(360deg)" },
+        },
+        "flip-in": {
+          "0%": { opacity: "0", transform: "rotateY(-90deg) translateY(20px)" },
+          "100%": { opacity: "1", transform: "rotateY(0deg) translateY(0)" },
+        },
+        "flip-hover": {
+          "0%": { transform: "rotateY(0deg)" },
+          "100%": { transform: "rotateY(8deg)" },
+        },
+      },
+      animation: {
+        // existing animations
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        shimmer: "shimmer 2s linear infinite",
+        glow: "glow 2s ease-in-out infinite",
+
+        // NEW flip animations
+        flip: "flip 10s linear infinite",
+        "flip-slow": "flip 16s linear infinite",
+        "flip-in": "flip-in 0.7s ease-out forwards",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "hero-gradient": "var(--gradient-hero)",
+        "accent-gradient": "var(--gradient-accent)",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+};
+
+export default config;
