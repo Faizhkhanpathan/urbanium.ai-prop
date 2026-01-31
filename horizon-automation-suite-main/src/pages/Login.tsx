@@ -5,14 +5,60 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 import UrbaniumLogo from "/URBANIUM.png";
 
+import {
+  login,
+  signup,
+  loginWithGoogle,
+  loginWithFacebook,
+} from "@/lib/auth";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/dashboard");
+    setError("");
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        await login(email, password);
+      } else {
+        await signup(email, password);
+      }
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Authentication failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogle = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  const handleFacebook = async () => {
+    try {
+      await loginWithFacebook();
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -20,6 +66,7 @@ const Login = () => {
       {/* Left Panel - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
+
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 mb-8">
             <img
@@ -49,40 +96,39 @@ const Login = () => {
             </p>
           </div>
 
+          {/* Error */}
+          {error && (
+            <div className="mb-4 rounded-md bg-red-500/10 text-red-500 text-sm p-3">
+              {error}
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">
-                    First Name
-                  </label>
-                  <Input placeholder="John" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">
-                    Last Name
-                  </label>
-                  <Input placeholder="Doe" />
-                </div>
-              </div>
-            )}
-
             <div>
-              <label className="text-sm font-medium text-foreground mb-1.5 block">
+              <label className="text-sm font-medium mb-1.5 block">
                 Email Address
               </label>
-              <Input type="email" placeholder="john@company.com" />
+              <Input
+                type="email"
+                placeholder="john@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
 
             <div>
-              <label className="text-sm font-medium text-foreground mb-1.5 block">
+              <label className="text-sm font-medium mb-1.5 block">
                 Password
               </label>
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <button
                   type="button"
@@ -98,20 +144,17 @@ const Login = () => {
               </div>
             </div>
 
-            {isLogin && (
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" className="rounded border-border" />
-                  <span className="text-muted-foreground">Remember me</span>
-                </label>
-                <a href="#" className="text-sm text-accent hover:underline">
-                  Forgot password?
-                </a>
-              </div>
-            )}
-
-            <Button variant="teal" className="w-full" size="lg">
-              {isLogin ? "Sign In" : "Create Account"}
+            <Button
+              variant="teal"
+              className="w-full"
+              size="lg"
+              disabled={loading}
+            >
+              {loading
+                ? "Please wait..."
+                : isLogin
+                ? "Sign In"
+                : "Create Account"}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </form>
@@ -130,8 +173,21 @@ const Login = () => {
 
           {/* Social Login */}
           <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline">Google</Button>
-            <Button variant="outline">GitHub</Button>
+            <Button variant="outline" onClick={handleGoogle}>
+              <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                className="h-5 w-5 mr-2"
+              />
+              Google
+            </Button>
+
+            <Button variant="outline" onClick={handleFacebook}>
+              <img
+                src="https://www.svgrepo.com/show/475647/facebook-color.svg"
+                className="h-5 w-5 mr-2"
+              />
+              Facebook
+            </Button>
           </div>
 
           {/* Toggle */}
@@ -148,7 +204,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right Panel */}
+      {/* Right Panel (UNCHANGED UI) */}
       <div className="hidden lg:flex flex-1 bg-hero-gradient items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-20" />
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />

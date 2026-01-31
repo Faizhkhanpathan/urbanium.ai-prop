@@ -27,8 +27,8 @@ export function Navbar() {
         className={`pointer-events-auto mx-auto backdrop-blur-xl transition-all duration-500 ease-out
           ${
             scrolled
-              ? "bg-background/95 shadow-md border border-border/40 rounded-2xl max-w-4xl"
-              : "bg-background/85 border-b border-border/40 rounded-none max-w-full"
+              ? "bg-white/10 dark:bg-black/10 shadow-black/10 border border-white/20 rounded-2xl max-w-4xl"
+              : "bg-white/5 dark:bg-black/5 border border-transparent rounded-none max-w-full"
           }`}
       >
         <div
@@ -37,14 +37,13 @@ export function Navbar() {
           `}
         >
           <div className="flex h-full items-center justify-between">
-            {/* Logo - IMAGE ONLY in circle format */}
+            {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group">
               <div
                 className={`relative rounded-full p-1.5 transition-transform duration-500
                   ${scrolled ? "scale-90" : "scale-100"}
                 `}
               >
-                {/* Clean image-only circular logo */}
                 <img
                   src="URBANIUM.png"
                   alt="Urbanium.AI"
@@ -52,20 +51,13 @@ export function Navbar() {
                 />
               </div>
 
-              <div className="leading-tight">
-                <span
-                  className={`font-semibold text-foreground transition-all duration-500
-                    ${scrolled ? "text-sm" : "text-base"}
-                  `}
-                >
-                  Urbanium.AI
-                </span>
-                {!scrolled && (
-                  <div className="text-[9px] text-muted-foreground tracking-[0.18em]">
-                  
-                  </div>
-                )}
-              </div>
+              <span
+                className={`font-semibold text-foreground transition-all duration-500
+                  ${scrolled ? "text-sm" : "text-base"}
+                `}
+              >
+                Urbanium.AI
+              </span>
             </Link>
 
             {/* Desktop Links */}
@@ -77,8 +69,8 @@ export function Navbar() {
                   className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors duration-300
                     ${
                       location.pathname === link.path
-                        ? "bg-accent/10 text-accent"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        ? "bg-white/10 text-accent"
+                        : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                     }`}
                 >
                   {link.name}
@@ -92,7 +84,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-3 px-3 text-xs font-medium"
+                  className="h-8 px-3 text-xs font-medium"
                 >
                   Dashboard
                 </Button>
@@ -110,7 +102,7 @@ export function Navbar() {
 
             {/* Mobile */}
             <button
-              className="rounded-lg p-1.5 hover:bg-muted lg:hidden transition-colors duration-200"
+              className="rounded-lg p-1.5 hover:bg-white/10 lg:hidden transition-colors duration-200"
               onClick={() => setIsOpen((prev) => !prev)}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -120,7 +112,7 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden border-t border-border/60 px-3 pb-3 pt-2 transition-all duration-400">
+          <div className="lg:hidden border-t border-white/20 px-3 pb-3 pt-2">
             <div className="mt-1 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
@@ -130,8 +122,8 @@ export function Navbar() {
                   className={`rounded-md px-3 py-2 text-sm transition-colors duration-200
                     ${
                       location.pathname === link.path
-                        ? "bg-accent/10 text-accent"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        ? "bg-white/10 text-accent"
+                        : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                     }`}
                 >
                   {link.name}
