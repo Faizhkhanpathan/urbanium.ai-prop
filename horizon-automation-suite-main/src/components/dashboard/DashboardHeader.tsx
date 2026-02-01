@@ -37,7 +37,7 @@ export function DashboardHeader({ title, subtitle }: DashboardHeaderProps) {
           {/* User */}
           <div className="flex items-center gap-3 pl-4 border-l border-border">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium text-foreground">John Doe</p>
+              <p className="text-sm font-medium text-foreground">Faiz khan</p>
               <p className="text-xs text-muted-foreground">Admin</p>
             </div>
             <div className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center">

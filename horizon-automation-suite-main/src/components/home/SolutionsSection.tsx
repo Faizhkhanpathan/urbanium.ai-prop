@@ -9,7 +9,7 @@ const solutions = [
     description:
       "Transform your living space with intelligent lighting, climate control, security systems, and automation.",
     tags: ["Residential", "Industrial", "Energy Saving"],
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-teal-500 via-cyan-500 to-sky-500",
     images: [
       "https://hbr.org/resources/images/article_assets/2024/06/Automation-by-Broadcom-AI-WLA-Hero-Image-1200x675-1.png",
       "https://zd-brightspot.s3.us-east-1.amazonaws.com/wp-content/uploads/2024/02/26091442/Shutterstock_1133982038.jpg",
@@ -26,7 +26,7 @@ const solutions = [
     description:
       "Modern web, mobile, and AI-driven applications built for performance, security, and scale.",
     tags: ["Web", "Apps", "AI", "Security"],
-    gradient: "from-violet-500 to-purple-500",
+    gradient: "from-cyan-500 via-sky-500 to-blue-500",
     images: [
       "https://devexhub.com/blog_images/1721899805_Web%20development%20services.png",
       "https://www.fidelsoftech.com/wp-content/uploads/2025/04/AI-Enabled-Web-Development-Services.jpg",
@@ -45,7 +45,7 @@ const solutions = [
     description:
       "Smart products designed for automation, energy efficiency, and intelligent monitoring.",
     tags: ["Solar", "IoT", "Smart Devices"],
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
     images: [
       "https://blog.planview.com/wp-content/uploads/2022/05/iStock-1293656833-1024x585.jpg",
       "https://www.differencebetween.net/wp-content/uploads/2017/10/Difference-between-product-and-service-1.jpg",
@@ -70,7 +70,7 @@ export function SolutionsSection() {
       setCurrentImages((prev) =>
         prev.map((idx, i) => (idx + 1) % solutions[i].images.length)
       );
-    }, 3000);
+    }, 3200);
     return () => clearInterval(interval);
   }, []);
 
@@ -88,7 +88,7 @@ export function SolutionsSection() {
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-3xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-accent">
+          <span className="text-sm font-semibold uppercase tracking-wider text-teal-500">
             Our Solutions
           </span>
           <h2 className="mt-3 mb-4 text-3xl font-bold md:text-4xl">
@@ -105,12 +105,13 @@ export function SolutionsSection() {
           {solutions.map((solution, index) => (
             <div
               key={solution.title}
-              className="group relative overflow-hidden rounded-2xl border bg-card transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+              className="group relative overflow-hidden rounded-2xl border bg-card
+              transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(13,148,136,0.25)]"
             >
               {/* Gradient */}
               <div className={`h-1.5 bg-gradient-to-r ${solution.gradient}`} />
 
-              {/* Explore Button */}
+              {/* Explore */}
               <div className="absolute right-4 top-4 z-20">
                 <Button
                   variant="outline"
@@ -118,19 +119,19 @@ export function SolutionsSection() {
                   onClick={() =>
                     setOpenDropdown(openDropdown === index ? null : index)
                   }
-                  className="flex items-center gap-2"
+                  className="border-teal-500/40 text-teal-600 hover:bg-teal-600/10"
                 >
                   Explore
                   <ArrowRight
-                    className={`h-4 w-4 transition-transform duration-300 ${
+                    className={`ml-2 h-4 w-4 transition-transform duration-300 ${
                       openDropdown === index ? "rotate-90" : ""
                     }`}
                   />
                 </Button>
 
-                {/* Dropdown with animation */}
                 <div
-                  className={`absolute right-0 mt-3 w-60 rounded-xl border bg-popover shadow-xl
+                  className={`absolute right-0 mt-3 w-60 rounded-xl border
+                  bg-background shadow-xl backdrop-blur-md
                   transition-all duration-300 origin-top
                   ${
                     openDropdown === index
@@ -144,7 +145,8 @@ export function SolutionsSection() {
                       onClick={() =>
                         handleExplore(solution.title, item.action)
                       }
-                      className="block w-full px-4 py-2.5 text-left text-sm hover:bg-muted transition-colors"
+                      className="block w-full px-4 py-2.5 text-left text-sm
+                      hover:bg-teal-500/10 hover:text-teal-600 transition"
                     >
                       {item.label}
                     </button>
@@ -152,15 +154,15 @@ export function SolutionsSection() {
                 </div>
               </div>
 
-              {/* Card Body */}
-              <div className="flex min-h-[450px] flex-col p-7 pt-14">
-                {/* Images */}
+              {/* Body */}
+              <div className="flex min-h-[460px] flex-col p-7 pt-14">
                 <div className="mb-5 relative h-60 overflow-hidden rounded-xl">
                   {solution.images.map((img, i) => (
                     <img
                       key={i}
                       src={img}
-                      className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
+                      className={`absolute inset-0 h-full w-full object-cover
+                      transition-all duration-700 ${
                         currentImages[index] === i
                           ? "opacity-100 scale-100"
                           : "opacity-0 scale-95"
@@ -180,7 +182,7 @@ export function SolutionsSection() {
                   {solution.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md bg-muted px-2.5 py-1 text-xs"
+                      className="rounded-md bg-teal-500/10 px-2.5 py-1 text-xs text-teal-600"
                     >
                       {tag}
                     </span>
