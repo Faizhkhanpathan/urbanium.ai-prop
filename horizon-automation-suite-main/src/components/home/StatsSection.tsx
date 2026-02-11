@@ -1,58 +1,46 @@
-import { Building, Users, Globe, Zap } from "lucide-react";
-
-const stats = [
-  {
-    icon: Building,
-    value: "500+",
-    label: "Projects Deployed",
-    description: "Across residential & commercial sectors",
-  },
-  {
-    icon: Users,
-    value: "10K+",
-    label: "Devices Connected",
-    description: "Real-time monitoring & control",
-  },
-  {
-    icon: Globe,
-    value: "25+",
-    label: "Countries",
-    description: "Global presence & support",
-  },
-  {
-    icon: Zap,
-    value: "99.9%",
-    label: "Uptime",
-    description: "Enterprise-grade reliability",
-  },
-];
+import { useEffect, useRef } from "react";
 
 export function StatsSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <div 
-              key={stat.label}
-              className="text-center group"
-              style={{ animationDelay: `${index * 100}ms` }}
+    <section className="relative py-25 bg-[#14053F] overflow-hidden">
+
+            {/* Direct Center Control */}
+      <div className="flex justify-center">
+
+        <div
+          className="
+            w-[10000px] 
+            h-[500px]
+            md:w-[12000px]
+            md:h-[800px]
+            rounded-3xl 
+             
+             
+             
+            shadow-[0_0_80px_rgba(0,0,0,0.4)]
+            transition-all duration-500
+          "
+        >
+          <div className="w-full h-full overflow-hidden rounded-2xl bg-black">
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
             >
-              <div className="inline-flex p-4 rounded-2xl bg-accent/10 mb-4 group-hover:bg-accent/20 transition-colors">
-                <stat.icon className="h-8 w-8 text-accent" />
-              </div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                {stat.value}
-              </div>
-              <div className="font-semibold text-foreground mb-1">
-                {stat.label}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {stat.description}
-              </div>
-            </div>
-          ))}
+              <source src="/videos/urbanium-vid.mp4" type="video/mp4" />
+            </video>
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -236,3 +236,87 @@
     background-size: 40px 40px;
   }
 }
+
+/*footer like glass*/
+.glass-text-hover {
+  position: relative;
+  color: rgba(255,255,255,0.7);
+  transition: all 0.35s ease;
+}
+
+.glass-text-hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px -6px;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.15)
+  );
+  opacity: 0;
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+
+.glass-text-hover:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.glass-text-hover:hover::before {
+  opacity: 1;
+}
+
+/*orbit rotating*/
+@keyframes orbit-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+
+
+/*solution page cta*/
+@keyframes gradientMove {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-48%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes gradientMoveSlow {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-52%) scale(1.08); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+.animate-gradientMove {
+  animation: gradientMove 8s ease-in-out infinite;
+}
+
+.animate-gradientMoveSlow {
+  animation: gradientMoveSlow 12s ease-in-out infinite;
+}

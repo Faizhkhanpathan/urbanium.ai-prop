@@ -5,182 +5,188 @@ const footerLinks = {
   solutions: [
     { name: "Smart Home", path: "/solutions#home" },
     { name: "Smart Office", path: "/solutions#office" },
-    { name: "Industrial IoT", path: "/solutions#industrial" },
-    { name: "Fisheries Monitoring", path: "/solutions#fisheries" },
+    { name: "Industrial Automation", path: "/solutions#industrial" },
+    { name: "and many more", path: "/solutions#fisheries" },
   ],
   products: [
     { name: "Smart Switches", path: "/products#switches" },
     { name: "Controllers", path: "/products#controllers" },
     { name: "Sensors", path: "/products#sensors" },
     { name: "Gateways", path: "/products#gateways" },
+    { name: "Solars", path: "#" },
   ],
-  company: [
-    { name: "About Us", path: "/about" },
-    { name: "Consultancy", path: "/consultancy" },
-    { name: "Case Studies", path: "/case-studies" },
-    { name: "Contact", path: "/contact" },
+  Consultancy: [
+    { name: "Web Development", path: "/products#switches" },
+    { name: "App Development", path: "/products#controllers" },
+    { name: "System design", path: "/products#sensors" },
+    { name: "Fisheries monitering", path: "/products#gateways" },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary text-primary-foreground">
-      {/* animated gradient glow backdrop */}
+    <footer className=" overflow-hidden bg-black">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(45,212,191,0.15),_transparent_55%)] opacity-80" />
 
-      {/* subtle moving grid */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px] opacity-10 animate-[circuit-flow_16s_linear_infinite]" />
-
       <div className="relative container mx-auto px-4 lg:px-8 py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
-          {/* Brand - Urbanium.AI with clean circle logo */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-6">
+
+          {/* BRAND */}
           <div className="lg:col-span-2">
             <Link
               to="/"
-              className="mb-6 inline-flex items-center gap-3 rounded-2xl bg-primary/10 px-3 py-2 backdrop-blur-md transition-all duration-300 hover:bg-primary/20 hover:shadow-[0_12px_40px_rgba(15,23,42,0.4)]"
+              className="
+                relative mb-6 inline-flex items-center gap-3 rounded-2xl
+                bg-white/10 px-3 py-2 backdrop-blur-md
+                transition-all duration-300
+
+                shadow-[0_0_25px_rgba(106,123,255,0.15)]
+                hover:shadow-[0_0_45px_rgba(106,123,255,0.35)]
+                hover:bg-white/15
+              "
             >
-              <div className="relative">
-                {/* Clean circle logo - NO green background */}
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 p-1.5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/40">
-                  <img 
-                    src="/URBANIUM.png"
-                    alt="Urbanium.AI"
-                    className="h-6 w-6 object-contain rounded-full"
-                  />
-                </div>
+              {/* LOGO */}
+              <div
+                className="
+                  relative w-10 h-10 rounded-full
+                  bg-white/10 border border-white/20
+                  p-1.5 flex items-center justify-center
+                  shadow-[0_0_18px_rgba(106,123,255,0.35)]
+                "
+              >
+                <img
+                  src="/URBANIUM.png"
+                  alt="Urbanium.AI"
+                  className="h-6 w-6 rounded-full"
+                />
               </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-base font-bold tracking-tight text-white">Urbanium.AI</span>
-                <span className="mt-[-2px] text-[10px] tracking-[0.22em] text-primary-foreground/60">
-                  SMART AUTOMATION
+
+              {/* TEXT */}
+              <div>
+                <span
+                  className="
+                    text-base font-bold text-white
+                    drop-shadow-[0_0_10px_rgba(255,255,255,0.35)]
+                  "
+                >
+                  Urbanium.AI
                 </span>
+                <div className="text-[10px] tracking-[0.22em] text-white/50">
+                  ---------------
+                </div>
               </div>
             </Link>
 
-            <p className="mb-6 max-w-sm text-sm text-primary-foreground/70">
+            <p className="max-w-sm text-sm text-white/70">
               End-to-end smart automation & IoT solutions for homes, offices, industries, and beyond.
               Transforming spaces into intelligent ecosystems.
             </p>
 
-            <div className="flex gap-3">
-              {[
-                { Icon: Linkedin, href: "#" },
-                { Icon: Twitter, href: "#" },
-                { Icon: Youtube, href: "#" },
-              ].map(({ Icon, href }) => (
+            <div className="mt-6 flex gap-3">
+              {[Linkedin, Twitter, Youtube].map((Icon, i) => (
                 <a
-                  key={href}
-                  href={href}
-                  className="group relative rounded-lg bg-primary-foreground/10 p-2 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/30"
+                  key={i}
+                  href="#"
+                  className="
+                    group rounded-lg bg-white/10 p-2
+                    transition-all duration-300
+                    hover:-translate-y-1 hover:bg-white/20
+                  "
                 >
-                  <span className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-tr from-accent/0 via-accent/40 to-accent/0 opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100" />
-                  <Icon className="relative h-5 w-5 text-primary-foreground group-hover:text-accent-foreground" />
+                  <Icon
+                    className="
+                      h-5 w-5 text-white
+                      transition-all duration-300
+                      group-hover:scale-110
+                      group-hover:drop-shadow-[0_0_6px_rgba(106,123,255,0.6)]
+                    "
+                  />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Solutions */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold tracking-wide text-white">Solutions</h4>
-            <ul className="space-y-2.5 text-sm">
-              {footerLinks.solutions.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="group inline-flex items-center gap-1 text-primary-foreground/70 transition-colors hover:text-white"
-                  >
-                    <span className="relative">
-                      {link.name}
-                      <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterColumn title="Solutions" links={footerLinks.solutions} />
+          <FooterColumn title="Products" links={footerLinks.products} />
+          <FooterColumn title="Consultancy" links={footerLinks.Consultancy} />
 
-          {/* Products */}
+          {/* CONTACT */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold tracking-wide text-white">Products</h4>
-            <ul className="space-y-2.5 text-sm">
-              {footerLinks.products.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="group inline-flex items-center gap-1 text-primary-foreground/70 transition-colors hover:text-white"
-                  >
-                    <span className="relative">
-                      {link.name}
-                      <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold tracking-wide text-white">Contact</h4>
+            <h4 className="mb-4 text-sm font-semibold tracking-wide text-white">
+              Contact
+            </h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 text-primary-foreground/75 hover:text-white transition-colors">
-                <Mail className="h-4 w-4 text-accent flex-shrink-0" />
-                <a
-                  href="mailto:info@urbanium.ai"
-                  className="hover:text-accent transition-colors"
-                >
-                  info@urbanium.ai
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-primary-foreground/75 hover:text-white transition-colors">
-                <Phone className="h-4 w-4 text-accent flex-shrink-0" />
-                <span>+91 98765 43210</span>
-              </li>
-              <li className="flex items-start gap-2 text-primary-foreground/75 hover:text-white transition-colors">
-                <MapPin className="mt-0.5 h-4 w-4 text-accent flex-shrink-0" />
-                <span>
-                  Innovation Hub
-                  <br />
-                  Nagpur, Maharashtra
-                </span>
-              </li>
+              <ContactItem Icon={Mail} text="urbaniumai@gmail.com" />
+              <ContactItem Icon={Phone} text="+91 98765 43210" />
+              <ContactItem Icon={MapPin} text="Nagpur, Maharashtra" />
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 border-t border-primary-foreground/10 pt-6">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-primary-foreground/55 md:flex-row">
-            <p className="flex items-center gap-1">
-              © 2026{' '}
-              <span className="font-semibold text-white">Urbanium.AI</span>
-              . All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link
-                to="/privacy"
-                className="relative hover:text-accent transition-colors group"
-              >
-                Privacy Policy
-                <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-              </Link>
-              <Link
-                to="/terms"
-                className="relative hover:text-accent transition-colors group"
-              >
-                Terms of Service
-                <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-              </Link>
-            </div>
+        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between text-xs text-white/55">
+          <p>
+            © 2026 <span className="font-semibold text-white">Urbanium.AI</span>. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="glass-text-hover">Privacy Policy</Link>
+            <Link to="/terms" className="glass-text-hover">Terms of Service</Link>
           </div>
         </div>
-      </div>
-
-      {/* small animated top wave separator */}
-      <div className="pointer-events-none absolute -top-10 left-0 right-0 h-10 opacity-40">
-        <div className="h-full w-full bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.35),_transparent_60%)] animate-[pulse_5s_ease-in-out_infinite]" />
       </div>
     </footer>
+  );
+}
+
+/* FOOTER COLUMN */
+function FooterColumn({ title, links }) {
+  return (
+    <div>
+      <h4 className="mb-4 text-sm font-semibold tracking-wide text-white">
+        {title}
+      </h4>
+      <ul className="space-y-2.5 text-sm">
+        {links.map((link) => (
+          <li key={link.name}>
+            <Link
+              to={link.path}
+             className="
+  relative inline-flex items-center
+  px-0 py-1 rounded-lg
+  text-white/70
+  transition-all duration-300
+  hover:text-white
+  hover:bg-white/10
+  hover:backdrop-blur-md
+
+  after:absolute after:left-0 after:-bottom-0.5
+  after:h-[1px] after:w-0 after:bg-white/70
+  after:transition-all after:duration-300
+  hover:after:w-full
+"
+>
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* CONTACT ITEM */
+function ContactItem({ Icon, text }) {
+  return (
+    <li className="relative inline-flex items-center
+   rounded-lg
+  text-white/70
+  transition-all duration-300
+  hover:text-white
+  hover:bg-white/10
+  hover:backdrop-blur-md">
+      <Icon className="h-4 w-4 text-white/70 transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
+      <span className="transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
+        {text}
+      </span>
+    </li>
   );
 }
