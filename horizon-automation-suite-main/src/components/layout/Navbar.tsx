@@ -37,6 +37,14 @@ export function Navbar() {
     }
   };
 
+  // Get nav links based on user auth state
+  const getNavLinks = () => {
+    if (user) {
+      return [...navLinks, { name: "Dashboard", path: "http://localhost:8080/dashboard" }];
+    }
+    return navLinks;
+  };
+
   useEffect(() => {
     const onScroll = () => {
       const currentScrollY = window.scrollY;
@@ -91,7 +99,7 @@ export function Navbar() {
             {/* MIDDLE – Navigation */}
             <div className="hidden lg:flex items-center gap-4">
               <div className="flex items-center gap-1">
-                {navLinks.map((link) => (
+                {getNavLinks().map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
@@ -151,8 +159,13 @@ export function Navbar() {
         {isOpen && (
           <div className="lg:hidden border-t border-white/20 px-4 pb-4 pt-3 bg-[#14053F]">
             <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)} className="text-white/70 py-3">
+              {getNavLinks().map((link) => (
+                <Link 
+                  key={link.path} 
+                  to={link.path} 
+                  onClick={() => setIsOpen(false)} 
+                  className="text-white/70 py-3 rounded-lg hover:bg-white/10 px-2 hover:text-white transition-all"
+                >
                   {link.name}
                 </Link>
               ))}
@@ -186,7 +199,7 @@ export function Navbar() {
                 <Link 
                   to="/login" 
                   onClick={() => setIsOpen(false)} 
-                  className="text-white/70 py-3 font-medium hover:text-white"
+                  className="text-white/70 py-3 font-medium hover:text-white rounded-lg px-2 hover:bg-white/10 transition-all"
                 >
                   Get Started
                 </Link>
