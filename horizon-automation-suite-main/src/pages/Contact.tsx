@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -14,7 +16,7 @@ export default function Contact() {
     message: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -23,28 +25,37 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 
-      if (data.success) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 4000);
+      if (!res.ok) {
+        throw new Error(data.message || "Something went wrong");
       }
-    } catch (err) {
-      console.error("Error submitting form:", err);
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 4000);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -146,9 +157,11 @@ export default function Contact() {
 
             <Button
               type="submit"
-              className="w-full py-6 bg-gradient-to-r from-[#FF66C4] to-[#6A7BFF] hover:scale-105 transition-transform"
+              disabled={loading}
+              className="w-full py-6 bg-gradient-to-r from-[#FF66C4] to-[#6A7BFF] hover:scale-105 transition-transform disabled:opacity-60"
             >
-              Send Message <Send className="ml-3 h-5 w-5" />
+              {loading ? "Sending..." : "Send Message"}
+              <Send className="ml-3 h-5 w-5" />
             </Button>
 
             {submitted && (
@@ -159,6 +172,12 @@ export default function Contact() {
               >
                 🚀 Message sent successfully!
               </motion.div>
+            )}
+
+            {error && (
+              <div className="text-red-400 text-sm text-center">
+                ❌ {error}
+              </div>
             )}
 
           </motion.form>
