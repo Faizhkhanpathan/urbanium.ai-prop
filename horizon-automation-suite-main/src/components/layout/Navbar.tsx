@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -14,7 +16,26 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true); 
+  const [user, setUser] = useState(null);
   const location = useLocation();
+
+  // Listen for auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -81,15 +102,41 @@ export function Navbar() {
                 ))}
               </div>
               <div className="flex items-center gap-2 border-l border-white/10 pl-4">
-                <Link to="/login">
-                  <Button size="sm" className="h-9 px-5 bg-white/90 text-black hover:bg-white shadow-lg">
-                    Get Started
-                  </Button>
-                </Link>
+                {user ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/20 flex items-center justify-center">
+                      {user.photoURL ? (
+                        <img 
+                          src={user.photoURL} 
+                          alt="Avatar" 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-bold text-sm">
+                          {user.email?.charAt(0).toUpperCase() || 'U'}
+                        </div>
+                      )}
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-9 px-3 text-white hover:bg-white/20 hover:text-white"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/login">
+                    <Button size="sm" className="h-9 px-5 bg-white/90 text-black hover:bg-white shadow-lg">
+                      Get Started
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
 
-            {/* RIGHT – Logo */}
+            {/* RIGHT – Logo + Mobile Menu */}
             <div className="flex-1 flex justify-end items-center gap-3">
               <img src="URBANIUM.png" alt="Logo" className={`rounded-full object-contain transition-all ${scrolled ? "h-8 w-8" : "h-10 w-10"}`} />
               <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -109,6 +156,41 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              {user ? (
+                <div className="pt-2 border-t border-white/20 flex items-center gap-3 py-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 flex items-center justify-center">
+                    {user.photoURL ? (
+                      <img 
+                        src={user.photoURL} 
+                        alt="Avatar" 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-bold text-base">
+                        {user.email?.charAt(0).toUpperCase() || 'U'}
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-8 px-3 text-white hover:bg-white/20 text-sm"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <Link 
+                  to="/login" 
+                  onClick={() => setIsOpen(false)} 
+                  className="text-white/70 py-3 font-medium hover:text-white"
+                >
+                  Get Started
+                </Link>
+              )}
             </div>
           </div>
         )}

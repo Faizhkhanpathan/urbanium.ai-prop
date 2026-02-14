@@ -13,6 +13,7 @@ import { DashboardLayout } from "./components/dashboard/DashboardLayout";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import Devices from "./pages/dashboard/Devices";
 import FisheriesDashboard from "./pages/dashboard/FisheriesDashboard";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -34,8 +35,10 @@ const App = () => (
             <Route index element={<DashboardHome />} />
             <Route path="devices" element={<Devices />} />
             <Route path="fisheries" element={<FisheriesDashboard />} />
-          </Route>
           
+
+          </Route>
+            <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
