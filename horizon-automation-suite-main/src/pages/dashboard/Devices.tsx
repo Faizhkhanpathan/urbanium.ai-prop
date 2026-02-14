@@ -12,7 +12,8 @@ import {
   Plus,
   Grid,
   List,
-  Search
+  Search,
+  AlertCircle
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -39,26 +40,33 @@ const Devices = () => {
     device.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const getStatusIcon = (status: string) => {
+    if (status === "online") return Wifi;
+    if (status === "offline") return WifiOff;
+    if (status === "warning") return AlertCircle;
+    return Cpu;
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <DashboardHeader 
         title="My Devices" 
         subtitle="Manage and monitor all your connected IoT devices"
       />
       
-      <div className="p-6 space-y-6">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8">
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between">
-          <div className="relative flex-1 max-w-md">
+        <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
+          <div className="relative flex-1 max-w-md w-full">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
               placeholder="Search devices by name, ID, or location..." 
-              className="pl-9"
+              className="pl-10 w-full"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <div className="flex items-center border border-border rounded-lg p-1">
               <button
                 onClick={() => setViewMode("grid")}
@@ -80,25 +88,25 @@ const Devices = () => {
           </div>
         </div>
 
-        {/* Devices Grid */}
-        {viewMode === "grid" ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {/* Grid View */}
+        {viewMode === "grid" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredDevices.map((device) => (
               <Link 
                 key={device.id}
                 to={device.type === "Fisheries" ? "/dashboard/fisheries" : `/dashboard/devices/${device.id}`}
-                className="data-card group cursor-pointer"
+                className="data-card group cursor-pointer p-4 sm:p-6 rounded-xl border shadow-sm hover:shadow-lg transition-all"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-2 rounded-lg bg-accent/10">
-                    <Cpu className="h-5 w-5 text-accent" />
+                    {getStatusIcon(device.status)({ className: "h-5 w-5 text-accent" })}
                   </div>
                   <button className="p-1 rounded hover:bg-muted opacity-0 group-hover:opacity-100 transition-opacity">
                     <MoreVertical className="h-4 w-4 text-muted-foreground" />
                   </button>
                 </div>
                 
-                <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors">
+                <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors text-sm sm:text-base">
                   {device.name}
                 </h3>
                 <p className="text-xs text-muted-foreground mb-3">{device.location}</p>
@@ -106,7 +114,7 @@ const Devices = () => {
                 <div className="flex items-center justify-between">
                   <Badge 
                     variant={device.status === "online" ? "default" : device.status === "warning" ? "secondary" : "destructive"}
-                    className="capitalize"
+                    className="capitalize text-xs"
                   >
                     <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
                       device.status === "online" ? "bg-green-400" :
@@ -125,48 +133,68 @@ const Devices = () => {
               </Link>
             ))}
           </div>
-        ) : (
+        )}
+
+        {/* List View */}
+        {viewMode === "list" && (
           <div className="data-card overflow-hidden">
-            <table className="w-full">
-              <thead className="border-b border-border">
-                <tr className="text-left">
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">Device</th>
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">ID</th>
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">Type</th>
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">Status</th>
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">Location</th>
-                  <th className="pb-3 text-sm font-medium text-muted-foreground">Last Update</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {filteredDevices.map((device) => (
-                  <tr key={device.id} className="hover:bg-muted/50 transition-colors">
-                    <td className="py-4">
-                      <Link 
-                        to={device.type === "Fisheries" ? "/dashboard/fisheries" : `/dashboard/devices/${device.id}`}
-                        className="font-medium text-foreground hover:text-accent"
-                      >
-                        {device.name}
-                      </Link>
-                    </td>
-                    <td className="py-4">
-                      <code className="text-xs text-muted-foreground">{device.id}</code>
-                    </td>
-                    <td className="py-4 text-sm text-muted-foreground">{device.type}</td>
-                    <td className="py-4">
-                      <Badge 
-                        variant={device.status === "online" ? "default" : device.status === "warning" ? "secondary" : "destructive"}
-                        className="capitalize"
-                      >
-                        {device.status}
-                      </Badge>
-                    </td>
-                    <td className="py-4 text-sm text-muted-foreground">{device.location}</td>
-                    <td className="py-4 text-sm text-muted-foreground">{device.lastUpdate}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[650px]">
+                <thead className="border-b border-border">
+                  <tr className="text-left">
+                    <th className="pb-3 text-sm font-medium text-muted-foreground pl-4">Device</th>
+                    <th className="pb-3 text-sm font-medium text-muted-foreground">ID</th>
+                    <th className="pb-3 text-sm font-medium text-muted-foreground">Type</th>
+                    <th className="pb-3 text-sm font-medium text-muted-foreground">Status</th>
+                    <th className="pb-3 text-sm font-medium text-muted-foreground">Location</th>
+                    <th className="pb-3 text-sm font-medium text-muted-foreground">Last Update</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {filteredDevices.map((device) => (
+                    <tr key={device.id} className="hover:bg-muted/50 transition-colors h-14">
+                      <td className="py-4 pl-4">
+                        <Link 
+                          to={device.type === "Fisheries" ? "/dashboard/fisheries" : `/dashboard/devices/${device.id}`}
+                          className="font-medium text-foreground hover:text-accent block max-w-xs truncate"
+                        >
+                          {device.name}
+                        </Link>
+                      </td>
+                      <td className="py-4">
+                        <code className="text-xs text-muted-foreground">{device.id}</code>
+                      </td>
+                      <td className="py-4 text-sm text-muted-foreground">{device.type}</td>
+                      <td className="py-4">
+                        <Badge 
+                          variant={device.status === "online" ? "default" : device.status === "warning" ? "secondary" : "destructive"}
+                          className="capitalize text-xs"
+                        >
+                          {device.status}
+                        </Badge>
+                      </td>
+                      <td className="py-4 text-sm text-muted-foreground max-w-xs truncate">{device.location}</td>
+                      <td className="py-4 text-sm text-muted-foreground">{device.lastUpdate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {filteredDevices.length === 0 && (
+          <div className="text-center p-12 rounded-xl border-2 border-dashed border-border bg-muted/20">
+            <Cpu className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="text-lg font-bold text-foreground mb-2">No devices found</h3>
+            <p className="text-sm text-muted-foreground mb-6">
+              {searchQuery ? `No devices match "${searchQuery}"` : "Add your first device to get started."}
+            </p>
+            <Button variant="teal">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Device
+            </Button>
           </div>
         )}
       </div>
