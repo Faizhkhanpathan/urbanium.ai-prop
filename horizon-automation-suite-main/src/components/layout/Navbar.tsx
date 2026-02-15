@@ -38,12 +38,13 @@ export function Navbar() {
   };
 
   // Get nav links based on user auth state
-  const getNavLinks = () => {
-    if (user) {
-      return [...navLinks, { name: "Dashboard", path: "http://localhost:8080/dashboard" }];
-    }
-    return navLinks;
-  };
+const getNavLinks = () => {
+  if (user) {
+    return [...navLinks, { name: "Dashboard", path: "/dashboard" }];
+  }
+  return navLinks;
+};
+
 
   useEffect(() => {
     const onScroll = () => {
