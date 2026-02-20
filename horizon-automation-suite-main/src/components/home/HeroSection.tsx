@@ -131,12 +131,15 @@ export function HeroSection() {
                       bg-clip-text text-transparent
                       ${phase === "exit" ? "scatter" : "gather"}
                     `}
-                    style={{
-                      ["--x"]: `${rx}px`,
-                      ["--y"]: `${ry}px`,
-                      ["--r"]: `${rr}deg`,
-                      animationDelay: `${i * 35}ms`,
-                    }}
+                   style={
+  {
+    "--x": `${rx}px`,
+    "--y": `${ry}px`,
+    "--r": `${rr}deg`,
+    animationDelay: `${i * 35}ms`,
+  } as React.CSSProperties
+}
+
                   >
                     {char === " " ? "\u00A0" : char}
                   </span>

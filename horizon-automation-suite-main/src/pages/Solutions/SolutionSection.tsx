@@ -14,11 +14,6 @@ interface Solution {
 }
 
 export function SolutionSection({ solutions }: { solutions: Solution[] }) {
-  const timePerImage = 5;
-  const totalImages = 3;
-  const totalDuration = timePerImage * totalImages;
-
-  /* 🔧 IMAGE FRAME CONTROL */
   const imageHeight = "300px";
   const imageMaxWidth = "700px";
 
@@ -33,48 +28,55 @@ export function SolutionSection({ solutions }: { solutions: Solution[] }) {
               index={index} 
               imageHeight={imageHeight}
               imageMaxWidth={imageMaxWidth}
-              totalDuration={totalDuration}
             />
           ))}
         </div>
       </div>
 
       <style>{`
-        .slideshow-track {
-          display: flex;
-          width: 300%;
-          animation: seamlessSlide linear infinite;
-        }
-
-        .slide-img {
+        .single-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          flex-shrink: 0;
-          transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          object-position: center;
+          transition: transform 0.6s ease;
         }
 
-        .group:hover .slide-img {
+        .group:hover .single-image {
           transform: scale(1.08);
         }
 
-        .group:hover .slideshow-track {
-          animation-play-state: paused;
+        .image-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            135deg,
+            rgba(106,123,255,0.35),
+            rgba(255,102,196,0.35),
+            rgba(106,123,255,0.35)
+          );
+          background-size: 200% 200%;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          animation: gradientMove 6s ease infinite;
+          pointer-events: none;
         }
 
-        @keyframes seamlessSlide {
-          0%, 30% { transform: translateX(0%); }
-          33.33%, 63.33% { transform: translateX(-100%); }
-          66.66%, 96.66% { transform: translateX(-200%); }
-          100% { transform: translateX(0%); }
+        .group:hover .image-gradient {
+          opacity: 1;
+        }
+
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
       `}</style>
     </section>
   );
 }
 
-/* Sub-component to handle scroll logic for each card */
-function SolutionCard({ solution, index, imageHeight, imageMaxWidth, totalDuration }: any) {
+function SolutionCard({ solution, index, imageHeight, imageMaxWidth }: any) {
   const containerRef = useRef(null);
   
   const { scrollYProgress } = useScroll({
@@ -82,24 +84,15 @@ function SolutionCard({ solution, index, imageHeight, imageMaxWidth, totalDurati
     offset: ["start end", "end start"],
   });
 
-  // Vertical Parallax Effect (Up/Down movement)
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  
-  // Dynamic Gradient Intensity (Fades in/out based on scroll position)
   const gradientOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
 
   return (
-    <motion.div
-      ref={containerRef}
-      style={{ y }}
-      className="relative"
-    >
-      {/* ===== GRADIENT BORDER WRAPPER ===== */}
+    <motion.div ref={containerRef} style={{ y }} className="relative">
       <motion.div
         style={{ opacity: gradientOpacity }}
         className="rounded-[2.5rem] p-[2px] bg-gradient-to-r from-[#6A7BFF] via-[#FF66C4] to-[#6A7BFF] shadow-[0_0_30px_rgba(106,123,255,0.2)]"
       >
-        {/* INNER CONTENT (NO GRADIENT INSIDE) */}
         <div className="rounded-[2.5rem] bg-[#0F0124] backdrop-blur-2xl border border-white/10 overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-11 items-center p-10 lg:p-10">
             
@@ -160,18 +153,19 @@ function SolutionCard({ solution, index, imageHeight, imageMaxWidth, totalDurati
                 className="relative mx-auto rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl group"
                 style={{
                   height: imageHeight,
-                  maxWidth: imageMaxWidth
+                  maxWidth: imageMaxWidth,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
                 }}
               >
-                {/* Slideshow Track */}
-                <div 
-                  className="slideshow-track"
-                  style={{ animationDuration: `${totalDuration}s` }}
-                >
-                  <img src={solution.image} alt="" className="slide-img" />
-                  <img src={solution.image} alt="" className="slide-img" />
-                  <img src={solution.image} alt="" className="slide-img" />
-                </div>
+                <img
+                  src={solution.image}
+                  alt={solution.title}
+                  className="single-image"
+                />
+
+                <div className="image-gradient" />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F0124]/80 via-transparent to-transparent pointer-events-none" />
 

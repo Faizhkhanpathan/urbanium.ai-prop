@@ -22,54 +22,58 @@ const BRANDS = [
 const CARDS = [
   {
     area: "div1",
-    title: "Fast Chargers Are Critical for EV Growth",
+    title: "Technology Consulting",
     desc:
-      "Scalable EV charging infrastructure powered by intelligent energy orchestration and AI forecasting.",
+      "We guide businesses in choosing and implementing the right technology solutions. and Turn ideas into structured, scalable, and profitable technology systems.",
     images: [
-      "https://images.unsplash.com/photo-1616617568756-2f7b2e7d4c28",
-      "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b",
+      "images\\slideshow\\div-1\\3rd.png",
+      "images\\slideshow\\div-1\\2nd.png",
+      "images\\slideshow\\div-1\\1st.png",
     ],
   },
   {
     area: "div2",
-    title: "Rural Healthcare Access",
-    desc: "AI-driven diagnostics expanding healthcare reach.",
+    title: "Web & Application Development",
+    desc: "We design and develop modern, scalable digital platforms for businesses.",
     images: [
-      "https://images.unsplash.com/photo-1580281657521-61e3e5b6f97c",
-      "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144",
+      "images\\slideshow\\div-2\\1st.png",
+      "images\\slideshow\\div-2\\2nd.png",
+      "images\\slideshow\\div-2\\3rd.png",
     ],
   },
   {
     area: "div3",
-    title: "Telecom API Monetization",
+    title: "IOT devices",
     desc:
-      "Enterprise APIs enabling next-generation revenue streams.",
+      "Provide reliable hardware solutions integrated with intelligent software systems.",
     images: [
-      "https://images.unsplash.com/photo-1581091870627-3b5b9c7c5a54",
-      "https://images.unsplash.com/photo-1581091870636-5c3a2c6dcd8f",
+      "images\\slideshow\\div-3\\1st.png",
+      "images\\slideshow\\div-3\\2nd.png",
     ],
   },
   {
     area: "div5",
-    title: "Enterprise 5G Expansion",
+    title: "Home automation",
     desc:
-      "Secure, scalable private 5G solutions for industry.",
+      "We provide intelligent home automation solutions for modern living. and Make homes safer, smarter, and energy efficient.",
     images: [
-      "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
-      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df",
+      "images\\slideshow\\div-5\\1st.png",
+      "images\\slideshow\\div-5\\2nd.png",
+      "images\\slideshow\\div-5\\3rd.png",
     ],
   },
   {
     area: "div4",
-    title: "AI-Driven Radiology",
+    title: "Office automation",
     desc:
-      "Advanced medical imaging intelligence at scale.",
+      "We transform traditional offices into smart, automated workspaces.",
     images: [
-      "https://images.unsplash.com/photo-1579154204601-01588f351e67",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+      "images\\slideshow\\div-4\\1st.png",
+      "images\\slideshow\\div-4\\2nd.png",
     ],
   },
 ];
+
 type Project = {
   title: string;
   category: string;
@@ -77,12 +81,14 @@ type Project = {
   description: string;
 };
 
+
+
 const PROJECTS: Project[] = [
   {
     title: "AI Infrastructure Platform",
     category: "Artificial Intelligence",
     imageUrl:
-      "https://images.unsplash.com/photo-1581091870627-3b5b9c7c5a54",
+      "images\\solution-section\\testemonial\\1.png",
     description:
       "Scalable AI systems designed for real-time enterprise intelligence.",
   },
@@ -90,7 +96,7 @@ const PROJECTS: Project[] = [
     title: "Cloud Automation Engine",
     category: "Cloud Computing",
     imageUrl:
-      "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
+      "images\\solution-section\\testemonial\\2.png",
     description:
       "Secure and scalable orchestration architecture for modern enterprises.",
   },
@@ -98,7 +104,7 @@ const PROJECTS: Project[] = [
     title: "Healthcare AI Diagnostics",
     category: "HealthTech",
     imageUrl:
-      "https://images.unsplash.com/photo-1579154204601-01588f351e67",
+      "images\\solution-section\\testemonial\\3.png",
     description:
       "Advanced medical imaging and predictive diagnostics powered by AI.",
   },
@@ -327,7 +333,7 @@ const slideVariants = {
     {/* IMAGE RIGHT */}
     <div className="relative h-[300px] rounded-2xl overflow-hidden feature-image image-strip lg:order-2">
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1581091870627-3b5b9c7c5a54" />
+        <img src="images\text_images(RL)\why-urbanium\1st.png" />
         <div className="image-overlay">
           <h4>AI Infrastructure</h4>
           <p>Scalable intelligent systems</p>
@@ -335,15 +341,15 @@ const slideVariants = {
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" />
+        <img src="https://media.istockphoto.com/id/1303835958/photo/african-american-it-engineer-in-data-center.jpg?s=612x612&w=0&k=20&c=gLWeflgvSpkt2avG8mgWAzq66uIbqbnwv-gCJ14GeK4="/>
         <div className="image-overlay">
-          <h4>Cloud Automation</h4>
-          <p>Enterprise-grade orchestration</p>
+          <h4>Secure System Architecture</h4>
+          <p>Built to scale safely.</p>
         </div>
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67" />
+        <img src="images\text_images(RL)\why-urbanium\3rd.png"/>
         <div className="image-overlay">
           <h4>Data Intelligence</h4>
           <p>Real-time analytics & insights</p>
@@ -360,25 +366,26 @@ const slideVariants = {
     {/* IMAGE LEFT */}
     <div className="relative h-[300px] rounded-2xl overflow-hidden feature-image image-strip lg:order-1">
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1581091870627-3b5b9c7c5a54" />
+        <img src="images\text_images(RL)\our-approach\1st.png"/>
         <div className="image-overlay">
-          <h4>AI Infrastructure</h4>
-          <p>Scalable intelligent systems</p>
+          <h4>Understanding Your Vision</h4>
+          <p>We analyze your goals, workflows, 
+            and long-term growth strategy to design systems that truly fit your business.</p>
         </div>
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" />
+        <img src="images\text_images(RL)\our-approach\2nd.png"/>
         <div className="image-overlay">
-          <h4>Cloud Automation</h4>
-          <p>Enterprise-grade orchestration</p>
+          <h4>Smart Technology Integration</h4>
+          <p>Secure systems designed to evolve as you scale.</p>
         </div>
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67" />
+        <img src="images\text_images(RL)\our-approach\3rd.png"/>
         <div className="image-overlay">
-          <h4>Data Intelligence</h4>
+          <h4> Scalable Architecture</h4>
           <p>Real-time analytics & insights</p>
         </div>
       </div>
@@ -472,26 +479,26 @@ const slideVariants = {
     {/* IMAGE RIGHT */}
     <div className="relative h-[300px] rounded-2xl overflow-hidden feature-image image-strip lg:order-2">
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1581091870627-3b5b9c7c5a54" />
+        <img src="/images/text_images(RL)/what-makes-diffrent/1st.png" />
         <div className="image-overlay">
-          <h4>AI Infrastructure</h4>
-          <p>Scalable intelligent systems</p>
+          <h4>Security by Design</h4>
+          <p>Protection embedded into every layer from the ground up.</p>
         </div>
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7" />
+        <img src="images\text_images(RL)\what-makes-diffrent\2nd.png" />
         <div className="image-overlay">
-          <h4>Cloud Automation</h4>
-          <p>Enterprise-grade orchestration</p>
+          <h4>Real-World Reliability</h4>
+          <p>Systems tested for performance in live, practical environments.</p>
         </div>
       </div>
 
       <div className="image-tile">
-        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67" />
+        <img src="images\text_images(RL)\what-makes-diffrent\3rs.png" />
         <div className="image-overlay">
-          <h4>Data Intelligence</h4>
-          <p>Real-time analytics & insights</p>
+          <h4>Long-Term Partnership</h4>
+          <p>Ongoing support and evolution beyond project delivery.</p>
         </div>
       </div>
     </div>
@@ -499,8 +506,21 @@ const slideVariants = {
   </div>
   
 </div>
-{/* ================= PROJECT SHOWCASE SLIDESHOW ================= */}
-<div className="container mx-auto px-6 mt-32">
+
+
+{/* ================= FEATURE 3rd HIGHLIGHT SECTION ================= */}
+{/* ===== TESTIMONIAL BACKGROUND TEXT ===== */}
+<div className="testimonial-section mt-40">
+
+  <h1 className="bg-title">
+    Testimonials
+  </h1>
+
+  {/* PROJECT SHOWCASE SLIDESHOW */}
+  <div className="container mx-auto px-6 relative z-10 mt-6">
+
+
+
   <div
     className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl"
     onMouseEnter={() => setIsHovered(true)}
@@ -520,10 +540,10 @@ const slideVariants = {
     </AnimatePresence>
 
     {/* Glass Overlay */}
-    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+<div className="absolute inset-0 bg-black/40" />
 
     {/* Content */}
-    <div className="absolute bottom-10 left-10 max-w-lg text-white">
+    {/* <div className="absolute bottom-10 left-10 max-w-lg text-white">
       <span className="text-sm uppercase tracking-widest text-[#6A7BFF]">
         {PROJECTS[slideIndex].category}
       </span>
@@ -535,7 +555,7 @@ const slideVariants = {
       <p className="text-white/80 mt-3 text-sm">
         {PROJECTS[slideIndex].description}
       </p>
-    </div>
+    </div> */}
 
     {/* Prev Button */}
     <button
@@ -568,9 +588,11 @@ const slideVariants = {
       ))}
     </div>
   </div>
+  </div>
+</div>
 </div>
 
-      </div>
+      
 
       {/* STYLES */}
       <style>{`
@@ -740,14 +762,31 @@ const slideVariants = {
 /* ===== GROUP BEHAVIOR ===== */
 
 /* When hovering the strip, shrink ALL */
-.image-strip:hover .image-tile {
-  flex: 0.6;
+.image-strip {
+  display: flex;
+  gap: 14px;
+  height: 300px; /* lock height */
 }
 
-/* Expand hovered tile to take ~2 tiles space */
-.image-strip .image-tile:hover {
-  flex: 2.2;
+.image-tile {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(.22,1,.36,1);
 }
+
+/* Slight horizontal expansion only */
+.image-strip:hover .image-tile {
+  flex: 0.9;
+}
+
+.image-strip .image-tile:hover {
+  flex: 1.6;
+}
+
 
 /* ===== GRADIENT HOVER OVERLAY ===== */
 .image-tile::after {
@@ -832,6 +871,47 @@ const slideVariants = {
   opacity: 1;
   transform: translateX(0);
 }
+
+/*testemonial css*/
+/* ================= TESTIMONIAL SECTION ================= */
+
+.testimonial-section {
+  position: relative;
+  overflow: hidden;
+
+  padding-top: 120px;   /* 👈 space from above */
+  padding-bottom: 20px;
+}
+
+/* BIG BACKGROUND TITLE */
+.bg-title {
+  position: absolute;
+  top: 0;              /* aligns perfectly */
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: clamp(5rem, 14vw, 14rem);
+  font-weight: 700;
+  white-space: nowrap;
+
+  color: rgba(255,255,255,0.07);
+
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* slideshow container */
+.testimonial-section .container {
+  position: relative;
+  z-index: 10;
+
+  margin-top: 40px; /* 👈 seamless overlap */
+}
+
 
 
     `}</style>

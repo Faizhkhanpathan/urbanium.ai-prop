@@ -127,11 +127,17 @@ const Consultancy = () => {
       <Navbar />
       <main className="pt-20">
         {/* HERO SECTION */}
-        <section className="py-28 bg-gradient-to-br from-[#0a0a1f]/95 via-indigo-900/60 to-purple-900/40 text-white overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-purple-500/5" />
-          <div className="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              
+      <section className="py-28 
+  bg-gradient-to-br 
+  from-[#14053f] 
+  via-[#14053f] 
+  to-[#14053f] 
+  text-white overflow-hidden relative"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-fuchsia-500/10" />
+  
+  <div className="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* LEFT - Hero Content */}
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}

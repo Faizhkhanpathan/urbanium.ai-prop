@@ -23,7 +23,7 @@ const solutions = [
       "Smart security",
     ],
     image:
-      "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop",
+      "images\\solution-section\\home-auto\\home-automation.png",
   },
   {
     id: "smart-office",
@@ -42,16 +42,16 @@ const solutions = [
   {
     id: "industrial",
     icon: Factory,
-    title: "Smart Industrial Automation Solutions",
+    title: "Web & app development",
     description:
-      "IIoT solutions for manufacturing excellence.",
+      "custom solution for web and mobile application",
     features: [
-      "Real-time monitoring",
-      "Predictive maintenance",
-      "OEE optimization",
+      "Responsive website",
+      "Mobile Application",
+      "eCommerce Platform",
     ],
     image:
-      "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=400&fit=crop",
+      "images\\solution-section\\home-auto\\web-app.jpg",
   },
 ];
 
