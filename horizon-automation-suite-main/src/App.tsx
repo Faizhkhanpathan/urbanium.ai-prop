@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Solutions from "./pages/Solutions/index";
 import Products from "./pages/Product/index";
-import Consultancy from "./pages/Consultancy";
+import Consultancy from "./pages/Consultancy/index";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { DashboardLayout } from "./components/dashboard/DashboardLayout";
